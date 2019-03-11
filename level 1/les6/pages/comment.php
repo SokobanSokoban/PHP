@@ -1,8 +1,17 @@
 <?php
 
-$query = "SELECT * FROM img ORDER BY click DESC";
+$sql = "SELECT * 
+        FROM img 
+        WHERE id = $id";
 
-$res = mysqli_query(connect (), $query) or die(mysqli_error($link));
+$result = mysqli_query(connect (), $sql);
+
+$row = mysqli_fetch_assoc($result);
+    $content .=<<<php
+    <h3>{$row['fio']}</h3>
+    <p>{$row['fio']}</p>
+    <hr>
+php;
 
 $content = '<div class="container">';
 
