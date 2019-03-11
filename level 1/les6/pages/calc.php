@@ -54,12 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// не понял как экранировать value="<?php echo $arg1?>"
+// не понял как экранировать value="<?php echo $arg1
 ?>
-
-
-
-    <form action="" method="post">
+   <form action="" method="post">
         agr1 = <input name="arg1" type="text" value="<?php echo $arg1?>" >
 
         <select name="operation" onchange="submit()">
