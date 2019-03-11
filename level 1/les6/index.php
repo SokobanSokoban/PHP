@@ -30,6 +30,9 @@ switch ($page) {
     case 8:
         include(PAGES . '/gallery.php');
         break;
+    case 9:
+        include(PAGES . '/comment.php');
+        break;       
     default:
         include(PAGES . '/main.php');
         break;
