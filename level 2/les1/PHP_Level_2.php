@@ -34,8 +34,9 @@ class Product extends PHP_Level_2
     public $count;
     public $measure;
 
-    public function __construct($article, $category, $title, $description, $size, $weight, $price, $country, $measure,$count)
+    public function __construct($article, $category, $title, $description, $size, $weight, $price, $country, $measure, $count)
     {
+        //        задаем параметры
         $this->article = $article;
         $this->category = $category;
         $this->title = $title;
@@ -46,6 +47,8 @@ class Product extends PHP_Level_2
         $this->country = $country;
         $this->measure = $measure;
         $this->count = $count;
+
+        self::$objects[] = $this;
     }
 
     public function view()
