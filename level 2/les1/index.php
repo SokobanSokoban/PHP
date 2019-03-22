@@ -1,34 +1,20 @@
 <?php
-   
-class PHP_Level_2 {
-    public $className ='1';
-    public $desc = '1';
-    static $objects = [];
-    
-    function get_desc() {
-       return  $this->className.'-'.$this->desc; 
-    }
-    
-    function __construct{
-  
-        
-    }
-}
+header ("Content-Type: text/html; charset=utf-8");
+include('PHP_Level_2.php');
+include('_567.php');
 
-class Product extends PHP_Level_2 {
-    
-    public $className ='product';
-    public $desc = 'prosto tovar magazina'; 
-}
+$good = new Product(123, "Сапоги", "Нью беланс",
+    "Натуральная кожа теленка",
+    "44", 1.4, 50000, "Китай", "Пара","12");
+$good->view();
+$good->removeFromStock(1);
+$good->removeFromStock(2);
+$good->removeFromStock(2);
+$good->removeFromStock(20);
 
-$ob = new PHP_Level_2();
-$ob->desc = 'magaz ';
-var_dump($ob);
-echo $ob->get_desc();
+//var_dump($good);
+var_dump(PHP_Level_2::$objects);
 
-$ob = new Product();
 
-var_dump($ob);
-echo $ob->get_desc();
-?>
-
+$tmp = file_get_contents('html.html');
+echo str_replace('{{content}}', $content, $tmp);
