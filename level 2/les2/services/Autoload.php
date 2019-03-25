@@ -1,5 +1,5 @@
 <?php
-//namespace App\services;
+namespace App\services;
 header('Content-type: text/html; charset=utf-8');
 
 class Autoload

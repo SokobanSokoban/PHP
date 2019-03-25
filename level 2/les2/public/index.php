@@ -1,5 +1,5 @@
 <?php
-//use App\services\Autoload as Autoload;
+use App\services\Autoload as Autoload;
 //use App\modules\User as User;
 //use App\modules\ProductBags as Bags;
 use App\modules\ProductShoes as ProductShoes;
