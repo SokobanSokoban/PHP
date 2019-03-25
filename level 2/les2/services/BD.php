@@ -1,52 +1,53 @@
 <?php
+namespace
 
-<?class DB {
+class DB {
 
-        protected static $_instance;  //экземпляр объекта
-  
-        public static function getInstance() { // получить экземпляр данного класса 
-            if (self::$_instance === null) { // если экземпляр данного класса  не создан
-                self::$_instance = new self;  // создаем экземпляр данного класса 
-            } 
-            return self::$_instance; // возвращаем экземпляр данного класса
+    protected static $_instance;  //СЌРєР·РµРјРїР»СЏСЂ РѕР±СЉРµРєС‚Р°
+
+    public static function getInstance() { // РїРѕР»СѓС‡РёС‚СЊ СЌРєР·РµРјРїР»СЏСЂ РґР°РЅРЅРѕРіРѕ РєР»Р°СЃСЃР°
+        if (self::$_instance === null) { // РµСЃР»Рё СЌРєР·РµРјРїР»СЏСЂ РґР°РЅРЅРѕРіРѕ РєР»Р°СЃСЃР°  РЅРµ СЃРѕР·РґР°РЅ
+            self::$_instance = new self;  // СЃРѕР·РґР°РµРј СЌРєР·РµРјРїР»СЏСЂ РґР°РЅРЅРѕРіРѕ РєР»Р°СЃСЃР°
         }
-   
-        private  function __construct() { // конструктор отрабатывает один раз при вызове DB::getInstance();
-                echo "<br/><em>1.  Установка соединения с хостом...";
-                //подключаемся к БД
-                $this->connect = mysql_connect(HOST, USER, PASSWORD) or die("Невозможно установить соединение".mysql_error());
-                // выбираем таблицу
-                echo "<br/>2.  Выбор базы...";
-                mysql_select_db(NAME_BD, $this->connect) or die ("Невозможно выбрать указанную базу".mysql_error());
-                // устанавливаем кодировку таблицы
-                echo "<br/>3.  Устанавливаем кодировку базы: ";
-                $this->query('SET names "utf8"');   
-                echo "<br/> Конструктор успешно открыл соединение с БД! и установил кодировку.</em>";
-        
+        return self::$_instance; // РІРѕР·РІСЂР°С‰Р°РµРј СЌРєР·РµРјРїР»СЏСЂ РґР°РЅРЅРѕРіРѕ РєР»Р°СЃСЃР°
+    }
+
+    private  function __construct() { // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РѕС‚СЂР°Р±Р°С‚С‹РІР°РµС‚ РѕРґРёРЅ СЂР°Р· РїСЂРё РІС‹Р·РѕРІРµ DB::getInstance();
+        echo "<br/><em>1.  РЈСЃС‚Р°РЅРѕРІРєР° СЃРѕРµРґРёРЅРµРЅРёСЏ СЃ С…РѕСЃС‚РѕРј...";
+        //РїРѕРґРєР»СЋС‡Р°РµРјСЃСЏ Рє Р‘Р”
+        $this->connect = mysql_connect(HOST, USER, PASSWORD) or die("РќРµРІРѕР·РјРѕР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЃРѕРµРґРёРЅРµРЅРёРµ".mysql_error());
+        // РІС‹Р±РёСЂР°РµРј С‚Р°Р±Р»РёС†Сѓ
+        echo "<br/>2.  Р’С‹Р±РѕСЂ Р±Р°Р·С‹...";
+        mysql_select_db(NAME_BD, $this->connect) or die ("РќРµРІРѕР·РјРѕР¶РЅРѕ РІС‹Р±СЂР°С‚СЊ СѓРєР°Р·Р°РЅРЅСѓСЋ Р±Р°Р·Сѓ".mysql_error());
+        // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕРґРёСЂРѕРІРєСѓ С‚Р°Р±Р»РёС†С‹
+        echo "<br/>3.  РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕРґРёСЂРѕРІРєСѓ Р±Р°Р·С‹: ";
+        $this->query('SET names "utf8"');
+        echo "<br/> РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СѓСЃРїРµС€РЅРѕ РѕС‚РєСЂС‹Р» СЃРѕРµРґРёРЅРµРЅРёРµ СЃ Р‘Р”! Рё СѓСЃС‚Р°РЅРѕРІРёР» РєРѕРґРёСЂРѕРІРєСѓ.</em>";
+
+    }
+
+    private function __clone() { //Р·Р°РїСЂРµС‰Р°РµРј РєР»РѕРЅРёСЂРѕРІР°РЅРёРµ РѕР±СЉРµРєС‚Р° РјРѕРґРёС„РёРєР°С‚РѕСЂРѕРј private
+    }
+
+    private function __wakeup() {//Р·Р°РїСЂРµС‰Р°РµРј РєР»РѕРЅРёСЂРѕРІР°РЅРёРµ РѕР±СЉРµРєС‚Р° РјРѕРґРёС„РёРєР°С‚РѕСЂРѕРј private
+    }
+
+    public static function query($sql) {
+
+        $obj=self::$_instance;
+
+        if(isset($obj->connect)){
+            $obj->count_sql++;
+            $start_time_sql = microtime(true);
+            $result=mysql_query($sql)or die("<br/><span style='color:red'>РћС€РёР±РєР° РІ SQL Р·Р°РїСЂРѕСЃРµ:</span> ".mysql_error());
+            $time_sql = microtime(true) - $start_time_sql;
+            echo "<br/><br/><span style='color:blue'> <span style='color:green'># Р—Р°РїСЂРѕСЃ РЅРѕРјРµСЂ ".$obj->count_sql.": </span>".$sql."</span> <span style='color:green'>(".round($time_sql,4)." msec )</span>";
+
+            return $result;
         }
- 
-        private function __clone() { //запрещаем клонирование объекта модификатором private
-        }
-        
-        private function __wakeup() {//запрещаем клонирование объекта модификатором private
-        }
-   
-        public static function query($sql) {
-        
-            $obj=self::$_instance;
-        
-            if(isset($obj->connect)){ 
-                $obj->count_sql++;
-                $start_time_sql = microtime(true);
-                $result=mysql_query($sql)or die("<br/><span style='color:red'>Ошибка в SQL запросе:</span> ".mysql_error());
-                $time_sql = microtime(true) - $start_time_sql;
-                echo "<br/><br/><span style='color:blue'> <span style='color:green'># Запрос номер ".$obj->count_sql.": </span>".$sql."</span> <span style='color:green'>(".round($time_sql,4)." msec )</span>";             
-                
-                return $result;
-            }
-            return false;
-        }   
-    
-   
-    
+        return false;
+    }
+
+
+
 }

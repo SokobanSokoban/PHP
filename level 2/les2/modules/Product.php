@@ -3,8 +3,8 @@ namespace App\modules;
 
 class Product extends Model
 {
-    protected $className = 'Товар';
-    protected $disc = 'Обычный товар, который мы продаем';
+    protected $className = 'РџСЂРѕРґСѓРєС‚';
+    protected $disc = 'РѕСЃРЅРѕРІР° РІСЃРµС… С‚РѕРІР°СЂРѕРІ';
 
     public $id;
     public $article;
@@ -20,7 +20,7 @@ class Product extends Model
 
     public function __construct($article, $category, $title, $description, $size, $weight, $price, $country, $measure, $count)
     {
-        //        задаем параметры
+
         $this->article = $article;
         $this->category = $category;
         $this->title = $title;
@@ -38,29 +38,29 @@ class Product extends Model
     public function view()
     {
         echo "
-            <hr><h2>Товар</h2>
-            <b>Артикул:</b> $this->article<br>
-            <b>Категория:</b> $this->category<br>
-            <b>Наименование:</b> $this->title<br>
-            <b>Описание:</b> $this->description<br>
-            <b>Размер:</b> $this->size<br>
-            <b>Вес:</b> $this->weight кг<br>
-            <b>Цена:</b> $this->price руб.<br>
-            <b>Страна-производитель:</b> $this->country<br>
-            <b>Количество на складе:</b> $this->count $this->measure.<br>
+            <hr><h2>РџР°СЂР°РјРµС‚СЂС‹</h2>
+            <b>РђСЂС‚РёРєСѓР»:</b> $this->article<br>
+            <b>РљР°С‚РµРіРѕСЂРёСЏ:</b> $this->category<br>
+            <b>Р—Р°РіРѕР»РѕРІРѕРє:</b> $this->title<br>
+            <b>РћРїРёСЃР°РЅРёРµ:</b> $this->description<br>
+            <b>Р Р°Р·РјРµСЂ</b> $this->size<br>
+            <b>Р’РµСЃ:</b> $this->weight ??<br>
+            <b>Р¦РµРЅР°:</b> $this->price ???.<br>
+            <b>РЎС‚СЂР°РЅР° РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊ</b> $this->country<br>
+            <b>Р•РґРёРЅРёС†Р° РёР·РјРµСЂРµРЅРёСЏ:</b> $this->count $this->measure.<br>
         ";
     }
 
-    // Списание товара со склада
+    // СЃРїРёСЃР°РЅРёРµ С‚РѕРІСЂР°
     public function removeFromStock($number)
     {
-        echo "<hr><h2>Списание со склада</h2>";
+        echo "<hr><h2>РЎРїРёСЃР°РЅРёРµ СЃРѕ СЃРєР»Р°РґР°</h2>";
         if (($this->count - $number) < 0) {
-            echo "<b>Недостаточное количество товара на складе для списания: $number шт.!</b><br>";
+            echo "<b>РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕРІР°СЂР° РЅР° СЃРєР»Р°РґРµ РґР»СЏ СЃРїРёСЃР°РЅРёСЏ: $number $this->measure.!</b><br>";
         } else {
             $this->count -= $number;
-            echo "<b>Списание товара $this->title в количестве $number шт. выполнено успешно!</b><br>";
+            echo "<b>РЎРїРёСЃР°РЅРёРµ С‚РѕРІР°СЂР° $this->title  $number . Р’С‹РїРѕР»РЅРµРЅРЅРµРѕ СѓСЃРїРµС€РЅРѕ!</b><br>";
         }
-        echo "<b>Остаток на складе:</b> $this->count шт.<br>";
+        echo "<b>РћСЃС‚Р°С‚РѕРє РЅР° СЃРєР»Р°РґРµ::</b> $this->count $this->measure.<br>";
     }
 }
