@@ -1,6 +1,7 @@
 <?php
 
- [
+echo 'on';
+$config = [
     // constant
 	'rootDir' => $_SERVER['DOCUMENT_ROOT'] . "/../",
 	'controllerNamespaces' => '\App\controllers\\',
